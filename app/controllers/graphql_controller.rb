@@ -19,7 +19,7 @@ class GraphqlController < ApplicationController
     byteslice = Rails.application.secrets.secret_key_base.byteslice(0..31)
     crypt = ActiveSupport::MessageEncryptor.new(byteslice)
     token = crypt.decrypt_and_verify(session[:token])
-    
+
     user_id = token.gsub('user-id:', '').to_i
     User.find_by(id: user_id)
 
